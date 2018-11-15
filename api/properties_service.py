@@ -128,7 +128,10 @@ def rawecolist(value):
   properties = rawlist()['properties']
 
   pdata=[]
-  for data in properties:    
+  for data in properties:
+    if not isinstance(data,dict):
+      data = json.loads(data)
+
     if value==2 and (data['propertyid']==2 or data['propertyid']>2147483650):
       pdata.append(data)
     elif value==1 and (data['propertyid']==1 or (data['propertyid']>2 and data['propertyid']<2147483648)):

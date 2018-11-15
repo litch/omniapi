@@ -393,6 +393,9 @@ def getrecenttxpages(page=1):
       pnl=getpropnamelist()
       if len(ROWS) > 0:
         for d in ROWS:
+          if isinstance(d[0],str):
+            # This is a weird case where the db engine sometimes returns a string, sometimes a dict.  What the fuck.
+            d[0] = json.loads(d[0])
           res = addName(d[0],pnl)
           try:
             res['confirmations'] = cblock - res['block'] + 1
@@ -842,7 +845,7 @@ def gettransaction_OLD(hash_id):
 
       if txType == 22:
         ROWS=dbSelect("select t.txhash,t.protocol,t.txdbserialnum,t.txtype,t.txversion,t.ecosystem,t.txrecvtime,t.txstate,t.txerrorcode,"
-                      "t.txblocknumber,t.txseqinblock,oa.*,txj.txdbserialnum,txj.protocol,txj.txdata " 
+                      "t.txblocknumber,t.txseqinblock,oa.*,txj.txdbserialnum,txj.protocol,txj.txdata "
                       "from transactions t, offeraccepts oa, txjson txj where t.txhash=%s "
                       "and t.txdbserialnum = oa.linkedtxdbserialnum and t.txdbserialnum=txj.txdbserialnum", [transaction_])
         try:

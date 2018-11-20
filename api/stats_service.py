@@ -117,7 +117,7 @@ def commits():
   try:
     json_response = json.loads(lGet(ckey))
     print_debug(("cache looked success",ckey),7)
-  except:  
+  except:
     print_debug(("cache looked failed",ckey),7)
     owlog=commands.getoutput('git --git-dir=../.git log --pretty=tformat:"%cd | %h | %H | %s" --date=short -n 12 --no-merges')
     response=[]

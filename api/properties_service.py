@@ -185,7 +185,7 @@ def listcrowdsales():
       if value not in valid_values:
           abort(make_response('Field \'ecosystem\' invalid value, request failed', 400))
 
-      ecosystem = "Production" if value == 1 else "Test" 
+      ecosystem = "Production" if value == 1 else "Test"
   except KeyError:
       abort(make_response('No field \'ecosystem\' in request, request failed', 400))
   except ValueError:

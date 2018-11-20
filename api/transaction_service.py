@@ -513,7 +513,7 @@ def gettxjson(hash_id):
             txdbserial=ROWS[0][1]
             blk_time=dbSelect("select extract(epoch from txrecvtime) from transactions where txdbserialnum = %s", [txdbserial])
             txJson['blocktime']=int(blk_time[0][0])
-          except: 
+          except:
             pass
       lSet(ckey,json.dumps(txJson))
       try:

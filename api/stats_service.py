@@ -75,9 +75,9 @@ def raw_stats():
     ousd = getCurrentPriceRaw('BTC')['price'] * obtc
 
     response = {'amount_of_wallets': wallets, 'txcount_24hr':txs, 'txdaily':txdaily, 'properties_count':opc, 'test_properties_count':topc, 'omni_btc':obtc, 'omni_usd':ousd}
-    #cache 20min
+    #cache 5sec
     lSet(ckey,json.dumps(response))
-    lExpire(ckey,1200)
+    lExpire(ckey,5)
 
   return response
 

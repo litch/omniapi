@@ -445,6 +445,8 @@ def getrawpending():
       pnl=getpropnamelist()
       if len(ROWS) > 0:
         for d in ROWS:
+          if isinstance(d[0],dict):
+            d[0] = json.loads(d[0])
           res = addName(d[0],pnl)
           if 'blocktime' not in res:
             try:
